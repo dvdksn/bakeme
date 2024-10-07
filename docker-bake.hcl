@@ -23,3 +23,7 @@ target "lint" {
   target = "lint"
   output = ["type=cacheonly"]
 }
+
+group "validate" {
+  targets = ["test", "lint"]
+}
