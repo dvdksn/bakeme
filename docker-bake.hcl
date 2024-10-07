@@ -18,3 +18,8 @@ target "test" {
   target = "test"
   output = ["type=cacheonly"]
 }
+
+target "lint" {
+  target = "lint"
+  output = ["type=cacheonly"]
+}
