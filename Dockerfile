@@ -24,3 +24,8 @@ RUN --mount=target=. \
 FROM alpine AS image
 COPY --from=build "/usr/bin/bakeme" "/usr/bin/bakeme"
 ENTRYPOINT ["/usr/bin/bakeme"]
+
+FROM base AS test
+RUN --mount=target=. \
+	--mount=type=cache,target=/go/pkg/mod \
+	go test .

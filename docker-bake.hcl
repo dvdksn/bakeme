@@ -13,3 +13,8 @@ target "default" {
     "linux/riscv64",
   ]
 }
+
+target "test" {
+  target = "test"
+  output = ["type=cacheonly"]
+}
