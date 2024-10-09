@@ -34,3 +34,6 @@ RUN --mount=target=. \
 FROM golangci/golangci-lint:v${GOLANGCI_LINT_VERSION}-alpine AS lint
 RUN --mount=target=.,rw \
 	golangci-lint run
+
+FROM scratch AS bin
+COPY --from=build "/usr/bin/bakeme" /
