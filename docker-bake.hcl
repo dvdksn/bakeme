@@ -34,3 +34,30 @@ target "lint" {
 group "validate" {
   targets = ["test", "lint"]
 }
+
+target "binaries" {
+  matrix = {
+    mode = ["release", "debug"]
+  }
+  name = "binaries-${mode}"
+  target = "binaries"
+  args = {
+    BUILD_TAGS = mode
+  }
+  output = ["type=local,dest=./build/${mode}"]
+  platforms = [
+    "linux/amd64",
+    "linux/arm64",
+    "linux/riscv64",
+  ]
+}
+
+target "localbin" {
+  # Enable debug mode
+  args = {
+    BUILD_TAGS = "debug"
+  }
+  target = "binaries"
+  output = ["type=local,dest=./build/local"]
+  platforms = ["local"]
+}
