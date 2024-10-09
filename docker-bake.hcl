@@ -1,7 +1,14 @@
 target "default" {
+  matrix = {
+    mode = ["release", "debug"]
+  }
+  name = "image-${mode}"
   target = "image"
+  args = {
+    BUILD_TAGS = mode
+  }
   tags = [
-    "bakeme:latest",
+    mode == "release" ? "bakeme:latest" : "bakeme:dev"
   ]
   attest = [
     "type=provenance,mode=max",

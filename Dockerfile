@@ -14,12 +14,12 @@ RUN --mount=src=go.mod,dst=go.mod \
 
 # build compiles the program
 FROM base AS build
-ARG TARGETOS TARGETARCH
+ARG TARGETOS TARGETARCH BUILD_TAGS
 ENV GOOS=$TARGETOS
 ENV GOARCH=$TARGETARCH
 RUN --mount=target=. \
 	--mount=type=cache,target=/go/pkg/mod \
-	go build -o "/usr/bin/bakeme" .
+	go build -tags="${BUILD_TAGS}" -o "/usr/bin/bakeme" .
 
 # image creates a runtime image
 FROM alpine AS image
